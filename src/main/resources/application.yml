@@ -10,3 +10,5 @@ spring:
       naming:
         physical-strategy: com.jmg.blog.infrastructure.config.JpaPhysicalNamingStrategy
     show-sql: true
+  querydsl:
+    enabled: true

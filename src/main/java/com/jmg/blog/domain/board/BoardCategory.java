@@ -9,8 +9,8 @@ import lombok.Getter;
 @Entity
 @Getter
 public class BoardCategory {
-   @Id
-   @GeneratedValue(strategy = GenerationType.IDENTITY)
-   private Long id;
-   private String name;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    private String name;
 }

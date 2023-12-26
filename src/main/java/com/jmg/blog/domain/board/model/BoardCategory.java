@@ -1,4 +1,4 @@
-package com.jmg.blog.domain.board;
+package com.jmg.blog.domain.board.model;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;

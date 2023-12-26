@@ -1,4 +1,4 @@
-package com.jmg.blog.domain.board;
+package com.jmg.blog.domain.board.model;
 
 import jakarta.persistence.*;
 import lombok.Getter;

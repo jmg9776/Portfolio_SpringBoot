@@ -1,5 +1,6 @@
-package com.jmg.blog.domain.board;
+package com.jmg.blog.domain.board.repository;
 
+import com.jmg.blog.domain.board.model.BoardPost;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface BoardPostRepository extends JpaRepository<BoardPost, Long> {

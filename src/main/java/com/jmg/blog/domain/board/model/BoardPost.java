@@ -1,4 +1,4 @@
-package com.jmg.blog.domain.board;
+package com.jmg.blog.domain.board.model;
 
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -16,7 +16,7 @@ public class BoardPost {
     private String content;
     @Column(columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
     private LocalDateTime createAt;
-
+    private Long view;
     @ManyToOne(fetch = FetchType.LAZY)
     private Board board;
 }

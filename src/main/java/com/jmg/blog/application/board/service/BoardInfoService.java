@@ -11,7 +11,7 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class BoardService {
+public class BoardInfoService {
     private final BoardInfoRepository boardInfoRepository;
 
     @Cacheable(value = "boardCategoryInfo", key = "#category")

@@ -2,7 +2,7 @@ package com.jmg.blog.board;
 
 import com.jmg.blog.application.board.response.BoardCategoryInfoResponse;
 import com.jmg.blog.application.board.response.BoardInfoResponse;
-import com.jmg.blog.application.board.service.BoardService;
+import com.jmg.blog.application.board.service.BoardInfoService;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
@@ -18,16 +18,16 @@ import static org.junit.jupiter.api.Assertions.*;
 public class BoardInfoServiceTest {
 
     @Autowired
-    private BoardService boardService;
+    private BoardInfoService boardInfoService;
     private static final Logger logger = LoggerFactory.getLogger(BoardInfoServiceTest.class);
 
     @Test
     @DisplayName("보드의 정보 가져오기")
     void boardInfoTest() {
         String searchText = "프로젝트";
-        List<BoardInfoResponse> noContentBoards = boardService.findByBoardName("NO CONTENT");
-        List<BoardInfoResponse> matchedBoards = boardService.findByBoardName(searchText);
-        List<BoardInfoResponse> allBoards = boardService.findByBoardName(null);
+        List<BoardInfoResponse> noContentBoards = boardInfoService.findByBoardName("NO CONTENT");
+        List<BoardInfoResponse> matchedBoards = boardInfoService.findByBoardName(searchText);
+        List<BoardInfoResponse> allBoards = boardInfoService.findByBoardName(null);
 
         logger.info(noContentBoards.toString());
         logger.info(matchedBoards.toString());
@@ -49,17 +49,17 @@ public class BoardInfoServiceTest {
         String invalidCategory = "존재하지않는카테고리";
 
         // 올바른 카테고리로 검색
-        List<BoardCategoryInfoResponse> validResults = boardService.findByCategory(validCategory);
+        List<BoardCategoryInfoResponse> validResults = boardInfoService.findByCategory(validCategory);
         logger.info("올바른 카테고리로 검색한 결과: " + validResults.toString());
         assertFalse(validResults.isEmpty(), "올바른 카테고리로 검색했을 때 결과가 비어있으면 안 됩니다.");
 
         // 잘못된 카테고리로 검색
-        List<BoardCategoryInfoResponse> invalidResults = boardService.findByCategory(invalidCategory);
+        List<BoardCategoryInfoResponse> invalidResults = boardInfoService.findByCategory(invalidCategory);
         logger.info("잘못된 카테고리로 검색한 결과: " + invalidResults.toString());
         assertTrue(invalidResults.isEmpty(), "잘못된 카테고리로 검색했을 때 결과가 비어있어야 합니다.");
 
         // null로 검색
-        List<BoardCategoryInfoResponse> nullResults = boardService.findByCategory(null);
+        List<BoardCategoryInfoResponse> nullResults = boardInfoService.findByCategory(null);
         logger.info("카테고리 없이 검색한 결과: " + nullResults.toString());
         assertNotNull(nullResults, "카테고리 없이 검색한 결과는 null이 아니어야 합니다.");
     }

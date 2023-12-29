@@ -19,7 +19,7 @@ public class BoardInfoService {
         return boardInfoRepository.findBoardInfoListByBoardCategory(category);
     }
 
-    @Cacheable(value = "boardInfo")
+    @Cacheable(value = "boardInfo", key = "#boardName")
     public List<BoardInfoResponse> findByBoardName(String boardName) {
         return boardInfoRepository.findBoardInfo(boardName);
     }

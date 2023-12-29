@@ -45,6 +45,6 @@ public class BoardInfoRepositoryTest {
     @Test
     @DisplayName("카테고리 기준으로 보드 정보 가져오기")
     void boardListByCategory() {
-        logger.info(boardInfoRepository.findBoardInfoListByBoardCategory(null).toString());
+        logger.info(boardInfoRepository.findBoardInfoByBoardCategory(null).toString());
     }
 }

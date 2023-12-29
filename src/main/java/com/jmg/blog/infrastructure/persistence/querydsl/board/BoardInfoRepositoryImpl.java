@@ -103,7 +103,7 @@ public class BoardInfoRepositoryImpl implements BoardInfoRepository {
      * @return 각 카테고리별로 분류된 보드 정보와 게시글 수를 포함하는 BoardCategoryInfoResponse 객체의 리스트.
      */
     @Override
-    public List<BoardCategoryInfoResponse> findBoardInfoListByBoardCategory(String categoryName) {
+    public List<BoardCategoryInfoResponse> findBoardInfoByBoardCategory(String categoryName) {
         Map<String, List<BoardInfoResponse>> boardInfoMap = getBoardInfoMap(categoryName);
 
         return boardInfoMap.entrySet().stream()

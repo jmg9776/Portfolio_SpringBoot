@@ -20,11 +20,11 @@ public class BoardInfoService {
      *
      * @param category 조회할 보드의 카테고리 이름. null이면 모든 카테고리의 보드를 조회합니다.
      * @return 주어진 카테고리에 해당하는 보드 정보의 리스트를 반환합니다.
-     *         각 정보에는 카테고리별로 분류된 보드의 이름과 게시글 수가 포함됩니다.
+     * 각 정보에는 카테고리별로 분류된 보드의 이름과 게시글 수가 포함됩니다.
      */
-    @Cacheable(value = "boardCategoryInfo", key = "#category")
+    @Cacheable(value = "boardCategoryInfo", key = "#category != null ? #category : 'all'")
     public List<BoardCategoryInfoResponse> findByCategory(String category) {
-        return boardInfoRepository.findBoardInfoListByBoardCategory(category);
+        return boardInfoRepository.findBoardInfoByBoardCategory(category);
     }
 
     /**
@@ -33,9 +33,9 @@ public class BoardInfoService {
      *
      * @param boardName 조회할 보드의 이름. null이면 시스템에 존재하는 모든 보드의 정보를 반환합니다.
      * @return 주어진 이름의 보드 정보 리스트를 반환합니다.
-     *         각 정보에는 보드의 이름과 해당 보드에 속한 게시글 수가 포함됩니다.
+     * 각 정보에는 보드의 이름과 해당 보드에 속한 게시글 수가 포함됩니다.
      */
-    @Cacheable(value = "boardInfo", key = "#boardName")
+    @Cacheable(value = "boardInfo", key = "#boardName != null ? #boardName : 'all'")
     public List<BoardInfoResponse> findByBoardName(String boardName) {
         return boardInfoRepository.findBoardInfo(boardName);
     }

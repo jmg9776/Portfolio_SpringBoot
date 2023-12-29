@@ -1,4 +1,4 @@
-package com.jmg.blog.application.board.controller;
+package com.jmg.blog.presentation.controller.board;
 
 import com.jmg.blog.application.board.response.BoardCategoryInfoResponse;
 import com.jmg.blog.application.board.service.BoardInfoService;

@@ -25,5 +25,5 @@ public interface BoardInfoRepository {
      * @param categoryName 조회할 보드 카테고리 이름. null이거나 빈 문자열일 경우, 모든 카테고리를 조회합니다.
      * @return 각 카테고리별로 분류된 보드 정보와 게시글 수를 포함하는 BoardCategoryInfoResponse 객체의 리스트.
      */
-    List<BoardCategoryInfoResponse> findBoardInfoListByBoardCategory(String categoryName);
+    List<BoardCategoryInfoResponse> findBoardInfoByBoardCategory(String categoryName);
 }

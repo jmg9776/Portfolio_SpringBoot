@@ -28,7 +28,7 @@ public class BoardInfoRepositoryTest {
         String greenText = "프로젝트";
         List<BoardInfoResponse> red = boardInfoRepository.findBoardInfo("NO CONTENT");
         List<BoardInfoResponse> green = boardInfoRepository.findBoardInfo(greenText);
-        List<BoardInfoResponse> all = boardInfoRepository.findBoardInfo(greenText);
+        List<BoardInfoResponse> all = boardInfoRepository.findBoardInfo(null);
 
         logger.info(red.toString());
         logger.info(green.toString());

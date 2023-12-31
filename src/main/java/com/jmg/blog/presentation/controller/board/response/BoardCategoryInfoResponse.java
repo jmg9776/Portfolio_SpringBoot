@@ -1,4 +1,4 @@
-package com.jmg.blog.application.board.response;
+package com.jmg.blog.presentation.controller.board.response;
 
 import java.util.List;
 

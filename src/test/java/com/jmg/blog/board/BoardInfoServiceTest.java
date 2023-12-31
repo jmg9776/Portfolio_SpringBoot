@@ -1,7 +1,7 @@
 package com.jmg.blog.board;
 
-import com.jmg.blog.application.board.response.BoardCategoryInfoResponse;
-import com.jmg.blog.application.board.response.BoardInfoResponse;
+import com.jmg.blog.presentation.controller.board.response.BoardCategoryInfoResponse;
+import com.jmg.blog.presentation.controller.board.response.BoardInfoResponse;
 import com.jmg.blog.application.board.service.BoardInfoService;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -24,7 +24,7 @@ public class BoardInfoServiceTest {
     @Test
     @DisplayName("보드의 정보 가져오기")
     void boardInfoTest() {
-        String searchText = "프로젝트";
+        String searchText = "블로그";
         List<BoardInfoResponse> noContentBoards = boardInfoService.findByBoardName("NO CONTENT");
         List<BoardInfoResponse> matchedBoards = boardInfoService.findByBoardName(searchText);
         List<BoardInfoResponse> allBoards = boardInfoService.findByBoardName(null);
@@ -45,7 +45,7 @@ public class BoardInfoServiceTest {
     @DisplayName("카테고리 기준으로 보드 정보 가져오기")
     void boardInfoByCategoryTest() {
         // 테스트에 사용할 데이터 설정
-        String validCategory = "포트폴리오";
+        String validCategory = "취업 준비";
         String invalidCategory = "존재하지않는카테고리";
 
         // 올바른 카테고리로 검색

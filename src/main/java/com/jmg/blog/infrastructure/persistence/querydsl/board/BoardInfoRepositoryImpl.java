@@ -1,7 +1,7 @@
 package com.jmg.blog.infrastructure.persistence.querydsl.board;
 
-import com.jmg.blog.application.board.response.BoardCategoryInfoResponse;
-import com.jmg.blog.application.board.response.BoardInfoResponse;
+import com.jmg.blog.presentation.controller.board.response.BoardCategoryInfoResponse;
+import com.jmg.blog.presentation.controller.board.response.BoardInfoResponse;
 import com.jmg.blog.domain.board.model.QBoard;
 import com.jmg.blog.domain.board.model.QBoardCategory;
 import com.jmg.blog.domain.board.model.QBoardPost;
@@ -159,8 +159,9 @@ public class BoardInfoRepositoryImpl implements BoardInfoRepository {
                 .from(boardCategory)
                 .leftJoin(board).on(board.boardCategory.eq(boardCategory))
                 .leftJoin(boardPost).on(boardPost.board.eq(board))
-                .groupBy(boardCategory.name, board.name)
+                .groupBy(boardCategory.name, board.name, boardCategory.id)
                 .where(createBoardCategoryNameCondition(categoryName))
+                .orderBy(boardCategory.id.desc())
                 .fetch();
     }
 

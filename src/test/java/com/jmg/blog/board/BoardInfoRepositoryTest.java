@@ -1,6 +1,6 @@
 package com.jmg.blog.board;
 
-import com.jmg.blog.application.board.response.BoardInfoResponse;
+import com.jmg.blog.presentation.controller.board.response.BoardInfoResponse;
 import com.jmg.blog.domain.board.repository.BoardInfoRepository;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -25,7 +25,7 @@ public class BoardInfoRepositoryTest {
     @Test
     @DisplayName("보드의 정보 가져오기")
     void boardListTest() {
-        String greenText = "프로젝트";
+        String greenText = "블로그";
         List<BoardInfoResponse> red = boardInfoRepository.findBoardInfo("NO CONTENT");
         List<BoardInfoResponse> green = boardInfoRepository.findBoardInfo(greenText);
         List<BoardInfoResponse> all = boardInfoRepository.findBoardInfo(null);

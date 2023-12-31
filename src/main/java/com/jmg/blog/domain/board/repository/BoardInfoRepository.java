@@ -1,7 +1,7 @@
 package com.jmg.blog.domain.board.repository;
 
-import com.jmg.blog.application.board.response.BoardCategoryInfoResponse;
-import com.jmg.blog.application.board.response.BoardInfoResponse;
+import com.jmg.blog.presentation.controller.board.response.BoardCategoryInfoResponse;
+import com.jmg.blog.presentation.controller.board.response.BoardInfoResponse;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;

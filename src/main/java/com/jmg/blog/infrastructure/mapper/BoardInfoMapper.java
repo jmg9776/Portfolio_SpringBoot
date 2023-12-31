@@ -1,6 +1,6 @@
 package com.jmg.blog.infrastructure.mapper;
 
-import com.jmg.blog.application.board.response.BoardInfoResponse;
+import com.jmg.blog.presentation.controller.board.response.BoardInfoResponse;
 import com.querydsl.core.Tuple;
 import org.mapstruct.Mapper;
 

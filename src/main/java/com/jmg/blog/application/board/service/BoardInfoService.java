@@ -1,7 +1,7 @@
 package com.jmg.blog.application.board.service;
 
-import com.jmg.blog.application.board.response.BoardCategoryInfoResponse;
-import com.jmg.blog.application.board.response.BoardInfoResponse;
+import com.jmg.blog.presentation.controller.board.response.BoardCategoryInfoResponse;
+import com.jmg.blog.presentation.controller.board.response.BoardInfoResponse;
 import com.jmg.blog.domain.board.repository.BoardInfoRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.cache.annotation.Cacheable;

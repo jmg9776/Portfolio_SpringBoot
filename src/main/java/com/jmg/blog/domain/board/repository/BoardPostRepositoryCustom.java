@@ -1,11 +1,9 @@
 package com.jmg.blog.domain.board.repository;
 
-import com.jmg.blog.presentation.controller.board.response.BoardPostListResponse;
-import org.springframework.stereotype.Repository;
+import com.jmg.blog.presentation.controller.board.response.BoardPostResponse;
 
 import java.util.List;
 
-@Repository
 public interface BoardPostRepositoryCustom {
-    List<BoardPostListResponse> findBoardPostListByBoardName(String boardName);
+    List<BoardPostResponse> findBoardPostListByBoardName(String boardName);
 }

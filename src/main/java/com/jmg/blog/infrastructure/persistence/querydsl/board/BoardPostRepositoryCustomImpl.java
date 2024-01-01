@@ -3,7 +3,7 @@ package com.jmg.blog.infrastructure.persistence.querydsl.board;
 import com.jmg.blog.domain.board.model.QBoard;
 import com.jmg.blog.domain.board.model.QBoardPost;
 import com.jmg.blog.domain.board.repository.BoardPostRepositoryCustom;
-import com.jmg.blog.presentation.controller.board.response.BoardPostListResponse;
+import com.jmg.blog.presentation.controller.board.response.BoardPostResponse;
 import com.querydsl.core.BooleanBuilder;
 import com.querydsl.core.types.ConstructorExpression;
 import com.querydsl.core.types.Projections;
@@ -27,7 +27,7 @@ public class BoardPostRepositoryCustomImpl implements BoardPostRepositoryCustom 
      * @return 검색된 게시물 목록
      */
     @Override
-    public List<BoardPostListResponse> findBoardPostListByBoardName(String boardName) {
+    public List<BoardPostResponse> findBoardPostListByBoardName(String boardName) {
         return jpaQueryFactory
                 .query()
                 .select(getBoardPostList())
@@ -35,22 +35,26 @@ public class BoardPostRepositoryCustomImpl implements BoardPostRepositoryCustom 
                 .innerJoin(board)
                 .on(boardPost.board.id.eq(board.id))
                 .where(createBoardNameCondition(boardName))
+                .orderBy(boardPost.createAt.desc())
                 .fetch();
     }
 
     // 게시물 목록을 생성하기 위한 프로젝션을 정의합니다.
-    private ConstructorExpression<BoardPostListResponse> getBoardPostList() {
+    public ConstructorExpression<BoardPostResponse> getBoardPostList() {
         return Projections.constructor(
-                BoardPostListResponse.class,
+                BoardPostResponse.class,
                 boardPost.id,
                 boardPost.title,
                 boardPost.view,
-                boardPost.createAt
+                boardPost.createAt,
+                board.name,
+                boardPost.primaryImage,
+                boardPost.content.substring(0,30)
         );
     }
 
     // 게시판 이름에 대한 조건을 생성하는 메서드입니다.
-    private BooleanBuilder createBoardNameCondition(String boardName) {
+    public BooleanBuilder createBoardNameCondition(String boardName) {
         BooleanBuilder builder = new BooleanBuilder();
         if (boardName != null) {
             builder.and(board.name.eq(boardName));

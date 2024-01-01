@@ -19,4 +19,6 @@ public class BoardPost {
     private Long view;
     @ManyToOne(fetch = FetchType.LAZY)
     private Board board;
+    @Column(length = 500)
+    private String primaryImage;
 }

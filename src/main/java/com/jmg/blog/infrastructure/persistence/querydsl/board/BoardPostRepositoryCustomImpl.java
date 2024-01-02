@@ -9,9 +9,12 @@ import com.querydsl.core.types.ConstructorExpression;
 import com.querydsl.core.types.Projections;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.stereotype.Repository;
+import org.springframework.data.domain.Pageable;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 @RequiredArgsConstructor
@@ -27,16 +30,34 @@ public class BoardPostRepositoryCustomImpl implements BoardPostRepositoryCustom 
      * @return 검색된 게시물 목록
      */
     @Override
-    public List<BoardPostResponse> findBoardPostListByBoardName(String boardName) {
-        return jpaQueryFactory
-                .query()
-                .select(getBoardPostList())
-                .from(boardPost)
-                .innerJoin(board)
-                .on(boardPost.board.id.eq(board.id))
-                .where(createBoardNameCondition(boardName))
-                .orderBy(boardPost.createAt.desc())
-                .fetch();
+    public PageImpl<BoardPostResponse> findBoardPostListByBoardName(String boardName, Pageable pageable) {
+        long totalPosts = countBoardPostsByBoardName(boardName);
+        long totalPages = (totalPosts + pageable.getPageSize() - 1) / pageable.getPageSize();
+        List<BoardPostResponse> posts =
+                jpaQueryFactory
+                        .query()
+                        .select(getBoardPostList())
+                        .from(boardPost)
+                        .innerJoin(board)
+                        .on(boardPost.board.id.eq(board.id))
+                        .where(createBoardNameCondition(boardName))
+                        .orderBy(boardPost.createAt.desc())
+                        .offset(pageable.getOffset())
+                        .limit(pageable.getPageSize())
+                        .fetch();
+        return new PageImpl<>(posts, pageable, totalPosts);
+    }
+
+    public long countBoardPostsByBoardName(String boardName) {
+        return Optional.ofNullable(
+                        jpaQueryFactory
+                                .select(boardPost.count())
+                                .from(boardPost)
+                                .innerJoin(board)
+                                .on(boardPost.board.id.eq(board.id))
+                                .where(createBoardNameCondition(boardName))
+                                .fetchOne())
+                .orElse(1L);
     }
 
     // 게시물 목록을 생성하기 위한 프로젝션을 정의합니다.
@@ -49,7 +70,7 @@ public class BoardPostRepositoryCustomImpl implements BoardPostRepositoryCustom 
                 boardPost.createAt,
                 board.name,
                 boardPost.primaryImage,
-                boardPost.content.substring(0,30)
+                boardPost.content.substring(0, 30)
         );
     }
 
